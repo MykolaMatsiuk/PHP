@@ -10,6 +10,9 @@ function htmlUploadFile () {
 }
 
 function saveFile () {
+  if (!isset($_FILES['userfile']) || $_FILES['userfile']['size'] > 2000000) {
+    die('File was not chosen or its size is more than 2MB!');
+  };
   $folder = (explode('/', $_FILES['userfile']['type']))[0];
   if (!file_exists('download/' . $folder)) {
     mkdir(('download/' . $folder));
@@ -20,19 +23,28 @@ function saveFile () {
 }
 
 function uploadFiles ($path) {
+  opendir($path);
   $data = scandir($path);
   array_shift($data);
   array_shift($data);
-  if ($path == 'download/image') {
-    echo "<h2>Pictures Gallery</h2>";
-    foreach ($data as $dir) {
-      echo "<img src='{$path}/{$dir}' height='100px' alt='picture'>";
+  foreach ($data as $dir) {
+    if ($dir == 'image') {
+      echo "<h2>Pictures Gallery</h2>";
+      $dir_image = scandir($path . "/" . $dir);
+      array_shift($dir_image);
+      array_shift($dir_image);
+      foreach ($dir_image as $inner) {
+        echo "<img src='{$path}/{$dir}/{$inner}' height='100px' alt='picture'>";
+      }
+    } else {
+      echo "<h2>Uploaded files list:</h2><ul>";
+      $dir_another = scandir($path . "/" . $dir);
+      array_shift($dir_another);
+      array_shift($dir_another);
+      foreach ($dir_another as $inner) {
+        echo "<li>$inner</li>";    
+      }
+      echo "</ul>";
     }
-  } else {
-    echo "<h2>Uploaded files list:</h2><ul>";
-    foreach ($data as $dir) {
-      echo "<li>$dir</li>";    
-    }
-    echo "</ul>";
   }
 }
