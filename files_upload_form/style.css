@@ -11,13 +11,14 @@ ul {
 li {
   background: linear-gradient(to bottom, #D8FEEB, #7CADF6);
   border-radius: 5px;
-  width: 370px;
+  width: 360px;
   padding: 5px;
   margin: 5px;
+  padding-left: 15px;
 }
 input {
-  background: #7CADF6;
-  border: 1px solid #D8FEEB;
+  background: #90D0EA;
+  border: 1px solid #7CADF6;
   border-radius: 5px;
   padding: 3px;
   height: 29px;

@@ -10,16 +10,13 @@ function htmlUploadFile () {
 }
 
 function saveFile () {
-  if (!isset($_FILES['userfile']) || $_FILES['userfile']['size'] > 2000000) {
-    die('File was not chosen or its size is more than 2MB!');
-  };
   $folder = (explode('/', $_FILES['userfile']['type']))[0];
   if (!file_exists('download/' . $folder)) {
     mkdir(('download/' . $folder));
   };
   move_uploaded_file($_FILES['userfile']['tmp_name'], 
     'download/' . $folder . "/" . $_FILES['userfile']['name']);
-  print_r($_FILES);
+ // print_r($_FILES);
 }
 
 function uploadFiles ($path) {
