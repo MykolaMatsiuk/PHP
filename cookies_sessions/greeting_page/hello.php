@@ -1,15 +1,10 @@
 <?php
-if (empty($user = $_POST['username'])) {
-  die("Enter your name!");
-}
+include_once "libs/Smarty.class.php";
+session_start();
 
-if (isset($_COOKIE['session_id'])) {
-  session_id($_COOKIE['session_id']);
-  echo "wellcome back $user<br>";
-  session_start();
-} else {
-  echo "hello $user";
-  session_start();
-  session_unset();
-  setcookie('session_id', session_id(), time() + 30);
-}
+$name = strip_tags(ucfirst($_POST['username']));
+$_SESSION['user']['name'] = $name;
+$smarty = new Smarty();
+$smarty -> setTemplateDir('template');
+$smarty -> display('hello.tpl');
+$smarty -> assign('name', $name);
