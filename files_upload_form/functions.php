@@ -10,13 +10,15 @@ function htmlUploadFile () {
 }
 
 function saveFile () {
-  $folder = (explode('/', $_FILES['userfile']['type']))[0];
-  if (!file_exists('download/' . $folder)) {
-    mkdir(('download/' . $folder));
-  };
-  move_uploaded_file($_FILES['userfile']['tmp_name'], 
-    'download/' . $folder . "/" . $_FILES['userfile']['name']);
- // print_r($_FILES);
+    if (!empty($_FILES['userfile'])) {
+        // $folder = (explode('/', $_FILES['userfile']['type']))[0];
+        $folder = 'image';
+        echo __FUNCTION__ . ' folder: ' .  $folder . '<br>';
+        if (!file_exists('download/' . $folder)) {
+            mkdir(('download/' . $folder));
+        }
+        move_uploaded_file($_FILES['userfile']['tmp_name'], 'download/' . $folder . "/" . $_FILES['userfile']['name']);
+    }
 }
 
 function uploadFiles ($path) {
