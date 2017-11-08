@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>layout</title>
+  <title>What's your name</title>
   <link rel="stylesheet" href="style/style.css">
 </head>
 <body>

@@ -1,7 +1,6 @@
-{extends file='layout.tpl'}
-
+{extends file="layout.tpl"}
 {block name=body}
-
-    <h1>Wellcome, {$smarty.session.user.name}</h1>
-
+  <h2>{$error}<h2>
+  <h1>Wellcome, {$smarty.session.name|default: null}</h1>
+  <a href="unlog.php">unlog</a>
 {/block}
