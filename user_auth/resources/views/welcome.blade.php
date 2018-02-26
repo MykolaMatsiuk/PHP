@@ -9,7 +9,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
         <!-- Styles -->
         <style>
             html, body {
@@ -65,17 +65,13 @@
         </style>
     </head>
     <body>
+        <div class="alert" role="alert">
+            <strong>{{ $msg or null }}</strong>
+        </div>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
                 <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
+                    <a href="{{ route('register') }}">Register</a>
                 </div>
-            @endif
 
             <div class="content">
                 <div class="title m-b-md">
