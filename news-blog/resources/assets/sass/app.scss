@@ -1,0 +1,271 @@
+
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+html, body {
+    background-color: #fff;
+    color: #636b6f;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 100;
+    height: 100vh;
+    margin: 0;
+}
+
+.full-height {
+    height: 100vh;
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.position-ref {
+    position: relative;
+}
+
+.top-right {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
+
+.content {
+    text-align: center;
+}
+
+.title {
+    font-size: 3rem;
+}
+
+.links a {
+    color: #636b6f;
+    padding: 0 25px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.m-b-md {
+    margin-bottom: 30px;
+}
+
+.item {
+    display: inline-flex;
+}
+.item li {
+    font-size: 0.8rem;
+    list-style: none;
+}
+.news-list {
+    margin: 50px 20px;
+}
+ul.news-ul li { 
+    padding: 10px;
+}
+ul.pagination li.page-item {
+    padding: 0;
+}
+.item-view .text {
+    width: 365px;
+    float: right;
+}
+.counter {
+    margin: 10px;
+    padding: 5px;
+    background-color: #BFECFB;
+}
+.tags-content {
+    margin: 10px;
+}
+.tags-title {
+    margin-left: 20px;
+}
+.footer {
+    margin-top: 20px;
+    height: 60px;
+}
+.text-footer {
+    margin: 0 auto;
+    width: 200px;
+    display: flex;
+    text-align: center;
+    padding: 10px;
+}
+.search-list {
+    position: absolute;
+    top: 44px;
+    width: 184px;
+    z-index: 10;
+    border: 1px solid magenta;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    border-color: #80bdff;
+    border-radius: 0.25rem;
+    background-color: #fff;
+
+    .search-item {
+        list-style: none;
+    }
+}
+.mod {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+.mod h2 {
+    margin-left: 10px;
+}
+.mod .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+.close {
+    text-align: right;
+}
+.top {
+    display: flex;
+}
+.commentators {
+    display: table;
+}
+.commentators li {
+    display: flex;
+    list-style: none;
+}
+.top-news {
+    display: table;
+}
+.top-news li {
+    list-style: none;
+}
+ul.navigation {
+    padding-left: 0;
+    margin-bottom: 0;
+}
+.navigation ul {
+    display: none;
+    list-style: none;
+    background-color: #f8f9fa;
+}
+.navigation a {
+    text-decoration: none;
+    color: #002300;
+}
+.navigation a:hover {
+    color: #02780A;
+}
+.navigation li {
+    float: left;
+    padding: 0 10px;
+    list-style: none;
+}
+.navigation ul li {
+    float: none;
+}
+.navigation li:hover ul.first-dd {
+    position: absolute;
+    top: 35px;
+    left: 132px;
+    display: block;
+    z-index: 10;
+}
+.navigation ul li:hover ul.second-dd {
+    position: absolute;
+    top: 45px;
+    right: 100px;
+    display: block;
+    z-index: 20;
+}
+.sitename {
+    width: 290px;
+    text-align: center;
+}
+.sitename h4 a:hover {
+    text-decoration: none;
+}
+#search {
+    margin-right: auto;
+}
+.footer {
+    clear: both;
+}
+.commercial {
+    margin-top: 30px;
+    border: 1px solid #3803FC;
+}
+.comm-item {
+    position: relative;
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #3803FC;
+}
+.comm-title {
+    padding: 5px;
+    color: #590202;
+    text-transform: uppercase;
+}
+.mod-comm {
+    width: 150px;
+    height: 50px;
+    position: absolute;
+    z-index: 20;
+    top: 150px;
+    right: 200px;
+    background-color: #B9A1FC;
+    color: #261E00;
+    opacity: 1;
+    transition: opacity 1s;
+}
+.mod-comm p {
+    padding: 10px;
+}
+.mod-comm.hide {
+    opacity: 0;
+}
+.discount {
+    color: #720101;
+}
+.discount:hover {
+    cursor: pointer;
+}
+.comm-item:hover .comm-price {
+    font-size: 1.1em;
+    color: red;
+}
+.filter form {
+    display: flex;
+}
+.exper {
+    display: flex;
+}
+.commentators, .top-news {
+    margin: 0 5px;
+    padding: 5px;
+    border: 1px solid #049AE8;
+    border-radius: 5px;
+}

@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\UploadAvaController;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
 
 class RegisterController extends Controller
 {
@@ -52,6 +55,7 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'age' => 'integer|max:150'
         ]);
     }
 
@@ -63,9 +67,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        // $file = new UploadAvaController();
+        // Storage::putFile('avas', new File($file->path), $file->filename);
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'age' => $data['age'],
+            // 'ava_src' => $file->filename,
             'password' => Hash::make($data['password']),
         ]);
     }
