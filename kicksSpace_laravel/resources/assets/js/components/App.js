@@ -9,7 +9,6 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      size: null,
       items: null,
       itemsInCart: [],
       cart: "Кошик порожній",
@@ -49,8 +48,15 @@ class App extends Component {
     axios
       .get("/api/getitems")
       .then(res => {
+        let arr = res.data
+          .sort(
+            (a, b) =>
+              new Date(b.created_at) -
+              new Date(a.created_at)
+          )
+          .slice(0, 19);
         this.setState({
-          items: res.data
+          items: arr
         });
       })
       .catch(error => {
@@ -58,9 +64,9 @@ class App extends Component {
       });
   }
 
-  addToCart(item) {
-    if (this.state.size != null) {
-      item.chosenSize = this.state.size;
+  addToCart(size, item) {
+    if (size != null) {
+      item.chosenSize = size;
       let cart = this.state.itemsInCart.concat(item);
       localStorage.setItem("cart", JSON.stringify(cart));
       this.setState({
@@ -71,8 +77,7 @@ class App extends Component {
             ? item.price
             : this.state.cart + item.price,
         itemsCount: cart.length,
-        chooseSize: !this.state.chooseSize,
-        size: null
+        chooseSize: null
       });
     } else {
       this.setState({ chooseSize: "вибери розмір" });
@@ -159,7 +164,9 @@ class App extends Component {
                 return (
                   <Item
                     obj={object}
-                    addToCart={() => this.addToCart(object)}
+                    addToCart={size =>
+                      this.addToCart(size, object)
+                    }
                     getSize={this.getSize.bind(this)}
                     chooseSize={this.state.chooseSize}
                     key={object.id}

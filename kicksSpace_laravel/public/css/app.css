@@ -460,10 +460,10 @@ select#size.form-control {
 }
 ul.list-group li.list-group-item {
   border-radius: 0;
-  opacity: 0.75;
+  opacity: 0.8;
 }
 .col-md-6 .card {
-  opacity: 0.75;
+  opacity: 0.8;
   border-radius: 0;
 }
 .col-md-6 .card .card-body {
@@ -528,6 +528,40 @@ footer {
 }
 #basket {
   min-height: 600px;
+}
+.cart-register {
+  margin-top: 50px;
+  opacity: 0.8;
+  border-radius: 0;
+}
+.cart-content {
+  margin: 0 auto;
+  padding-top: 50px;
+  opacity: 0.8;
+}
+.cart-content .cart-item {
+  border-radius: 0;
+}
+.cart-content .cart-item .basket-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: auto;
+  font-size: larger;
+}
+.cart-content .cart-item .basket-item .whole-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: auto 0;
+}
+.cart-content .cart-item .basket-item .whole-item select {
+  margin-left: 20px;
+}
+.cart-content .cart-item .basket-item .whole-item .cart-item-words {
+  margin-left: 20px;
+  font-size: large;
+  color: #240000;
 }
 @-webkit-keyframes dash {
   to {

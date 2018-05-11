@@ -9,11 +9,10 @@ class Item extends Component {
     };
   }
 
-  passSize(size) {
+  chooseSize(size) {
     this.setState({
       active: this.state.active === size ? null : size
     });
-    this.props.getSize(this.state.active);
   }
 
   render() {
@@ -61,7 +60,7 @@ class Item extends Component {
                         "active"
                       }
                       onClick={() =>
-                        this.passSize(size.size)
+                        this.chooseSize(size.size)
                       }
                     >
                       {size.size}
@@ -73,7 +72,9 @@ class Item extends Component {
             </div>
             <button
               className="btn sub"
-              onClick={this.props.addToCart}
+              onClick={() =>
+                this.props.addToCart(this.state.active)
+              }
             >
               До кошику
             </button>
