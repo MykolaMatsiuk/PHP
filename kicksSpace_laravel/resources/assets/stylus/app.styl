@@ -1,0 +1,471 @@
+@import "variables.styl"
+
+border-radius($value = 0)
+  -webkit-border-radius $value
+  -moz-border-radius $value
+  border-radius $value
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 100%;
+  font-family: 'Noto Sans', sans-serif;
+}
+body
+  padding-top 0
+  background url('/images/back.jpg') no-repeat center center fixed
+  background-size: cover;
+  height: 100%;
+
+nav.navbar
+  height 40px
+  padding 0
+
+.lang
+  padding 0
+  color $f-color
+
+.dropdown-menu
+  background-color $nav-color
+  border none
+  border-radius()
+  margin 0
+  color #9F9E9E
+
+a.dropdown-item
+  color $f-color
+  &:hover
+    background-color $nav-color
+    color @color
+    font-weight bold
+
+.title-main
+  width 50% 
+  text-align center
+  a
+    color #fff
+    font-size 2rem
+    &:hover
+      color @color
+      text-decoration none
+
+.main-title
+  font-family 'Lobster', cursive
+
+.right-sec
+  background-color $sp-color
+  width 25%
+  text-align center
+  height 40px
+
+@media (max-width: 992px)
+  .right-sec
+    width 65%
+    .cart-img
+      margin-left 2rem
+
+@media (max-width: 768px)
+  a.lang
+    margin-left 10px
+  // .logo-kicks
+  //   absolute top left 50%
+  //   z-index 100
+  .right-sec
+    width 75%
+    .cart-img
+      margin-left 5rem
+    .cart-msg
+      display none
+
+
+@media (max-width: 520px)
+  .right-sec
+    .login
+      width auto
+      // margin-left -40px
+      background-color $sp-color
+    .cart
+      width 25%
+      float right
+      margin-left 15px
+    .cart-img
+      margin-left 1.5rem
+    .cart-msg
+      display none
+    .dropdown-menu
+      background-color $nav-color
+
+
+.drop-log
+  padding-right 0
+  padding-left 0
+
+.login
+  // display flex
+  width 100%
+  position relative
+  padding-right 0
+  color #fff
+  background-color $sp-color
+  @extend .right-sec
+  a 
+    display -webkit-inline-box
+    color #fff
+    padding-top 5px
+    &:hover
+      text-decoration none
+
+a.drop-log
+.cart-msg
+  color #fff
+.items-count
+  color #fff
+  float right
+  margin-right 10px
+
+a.reg
+  text-decoration none
+  padding .5rem
+  @extend a.drop-log
+  &:hover
+    color $nav-color
+
+a.drop-log
+  &:hover
+    color: $nav-color
+
+.user
+  list-style none
+  padding 0.5rem
+  a.user-name
+    @extends a.drop-log
+    &:hover
+      text-decoration none
+
+.dropdown-login
+  position absolute
+  min-width 100%
+  padding 10px
+  left 0
+  background-color $sp-color
+  &> li:last-of-type
+    float: right;
+    width: 48%;
+  .btn
+    margin-top 30px
+    padding 10px
+    border-radius()
+    width 100%
+  li
+    list-style none
+
+.form-login
+  width 100%
+  float left
+  color #fff
+
+input.form-control
+  border-radius()
+
+.cart
+  width 50%
+  padding-top .55rem
+  background-color $sp-color
+
+.cart-search
+  position relative
+  display flex
+  &.fixed
+    position fixed
+    z-index 150
+    top 16px
+    left 0
+    transition all 1s
+
+.search
+  position relative
+  margin 1.5rem 0
+  width 50%
+  float right
+  border none
+
+.cart-with-drop
+  position relative
+  width 50%
+  margin 1.5rem 0
+  font-size 1.2rem
+
+div.cart-kicks
+  padding 10px 0
+  background-color $sp-color
+  text-align center
+  &.clickable
+    &:hover
+      cursor pointer
+
+.cart-drop
+  display none
+  position absolute
+  top 48px
+  left 0
+  z-index 10
+  width 100%
+  background-color #fff
+  border 2px solid $sp-color
+  padding-bottom 0
+  li
+    height 80px
+    padding 10px
+    list-style none
+    text-align center
+    border-bottom 1px solid $sp-color
+  .cart-drop-img
+    float left
+  .cart-drop-close
+    float right
+    padding 0 6px 1px 7px
+    border 1px solid #fff
+    &:hover
+      cursor pointer
+      color #B80303
+      border 1px solid #B80303
+      border-radius 50%
+  a.btn
+    float right
+    margin-right 10px
+    margin-bottom 10px
+    color $sp-color
+    border 2px solid $sp-color
+    background-color #fff
+    border-radius 0
+    &:hover
+      background-color $sp-color
+      color #fff
+      border-color $sp-color
+  &.show
+    display block
+
+.input
+  width 90%
+  border none
+  height 48px
+  background #F3F3F3
+  padding-left 47px
+  &:focus
+    box-shadow: 0 0 0.1rem 0.1rem rgba(0,123,255,.25);
+    outline: none;
+
+.btn-search
+  position absolute
+  right 0
+  top 2px
+  width 10%
+  padding 0
+  border none
+  border-radius()
+  margin-top -2px
+  margin-left -5px
+  background #F3F3F3
+  height 48px
+  &:focus
+    @extend .input:focus
+
+.cat-nav
+  margin 0px 0 30px
+  background-color #F3F3F3
+
+button.navbar-toggler
+  margin-left 10px
+
+li.nav-item
+  padding 0 5px
+  // border-bottom 2px solid #F3F3F3
+  &:hover
+    background #fff
+    // border-bottom 2px solid $sp-color
+
+ul.navbar-nav li.nav-item a.nav-link:hover
+  color $sp-color
+
+/**
+ *
+ * Styles for registration
+ *
+ */
+.reg-title
+  font-size 1.5rem
+  margin-left 10px
+.radio-item
+  margin-left 35px
+.sub
+  color $nav-color
+  font-weight bolder
+  border-radius()
+  background-color #fff
+  border 2px solid $nav-color
+  &:hover
+    cursor pointer
+    color #fff
+    border 2px solid #fff
+    background-color $nav-color
+
+/**
+ *
+ * Styles for Items
+ *
+ */
+.hide
+ display none
+ z-index 100
+ position absolute 
+ left 0 
+ right 0
+ margin 0 15px 5px
+ padding 5px
+ background-color #f3f3f3
+ border 1px solid rgba(0,0,0,.125)
+ border-top none
+ .sizes
+   padding 5px
+   border-top 1px solid #000
+   span.active a
+     color blue
+   a
+     color #000
+     &:hover
+       text-decoration none
+ ul 
+   text-align left
+   padding 5px
+   li
+     display inline-block
+     list-style none
+     padding 5px
+     margin 3px
+     border 1px solid rgba(0,0,0,.125)
+     a
+       text-decoration none
+       color #000
+     &:hover, &.active
+       cursor pointer
+       background-color lightblue
+       a
+         color white
+
+div.col-lg-3.col-md-4.col-sm-6.portfolio-item
+ padding 15px
+ position relative
+ &:hover
+   .hide
+     display block
+   .card
+     border-bottom none
+ .card
+   border-radius()
+   .card-body
+     padding-bottom 5px
+ .item-content
+   text-align center
+.item-btn
+ width 49%
+
+div.card.h-100
+  background-color #f3f3f3
+
+//zoom in owl-carousel
+.owl-item.active
+  margin 0
+  overflow hidden
+  position relative
+  cursor zoom-in
+  img
+   width 100%
+   float left
+   &.zoom
+     position absolute
+     transition all 0.2s
+
+.prod-show
+  display flex
+  .col-md-6
+    .name-price
+      display flex
+      .name-model
+        width 70%
+    .item-desc
+      font-weight bold
+  .choose-size
+    font-weight bold
+
+select#size.form-control
+  border-radius()
+ul.list-group li.list-group-item
+  border-radius()
+  opacity 0.75
+
+.col-md-6
+  .card
+    opacity 0.75
+    border-radius()
+    .card-body
+      padding 0.5rem
+      textarea.form-control
+        border-radius()
+      button.btn
+        border-radius()
+        border 2px solid $sp-color
+        background-color #fff
+        color $sp-color
+        &:hover
+          cursor pointer
+          background-color $sp-color
+          color #fff
+
+i.fas.fa-thumbs-up, i.fas.fa-thumbs-down
+  &:hover
+    cursor pointer
+
+
+/**
+ *
+ * styles for 404 page
+ *
+ */
+ @keyframes dash {
+   to {
+     stroke-dashoffset: 0;
+   }
+ }
+ h2, p {
+   margin-left: 10px;
+ }
+ #svg_1, #svg_8, #svg_7, #svg_6, #svg_3 {
+   stroke-dashoffset: 200px;
+   stroke-dasharray: 200px;
+   animation: dash 2s linear forwards;
+ }
+ #svg_4, #svg_5 {
+   stroke-dasharray: 280px;
+   stroke-dashoffset: 280px;
+   animation: dash 2s linear forwards;
+ }
+ #svg_2 {
+   stroke-dasharray: 705px;
+   stroke-dashoffset: 705px;
+   animation: dash 2s linear forwards;
+ }
+
+footer
+  // position: fixed;
+  // bottom 0
+  width 100%
+  height 60px
+  line-height 60px
+  margin-top 20px
+  background-color $nav-color
+
+
+//height for cart page
+#basket
+  min-height 600px

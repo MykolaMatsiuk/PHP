@@ -1,0 +1,9 @@
+select.form-control {
+  width: 100px;
+  display: inline-block;
+  margin-bottom: 10px;
+  border-radius: 0;
+}
+input.reg-btn {
+  border-radius: 0;
+}
