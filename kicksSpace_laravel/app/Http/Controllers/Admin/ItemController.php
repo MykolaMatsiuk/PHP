@@ -126,6 +126,7 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request->toArray());
         $this->validate($request, [
             'name' => 'required',
             'model' => 'required',

@@ -14,7 +14,7 @@ class AjaxController extends Controller
 {
     public function getItems()
     {
-        $items = Item::with('images', 'sizes')->get();
+        $items = Item::with('images', 'sizes')->get(); //limit 20 //orders 2 tables
 
         return response()->json($items);
     }

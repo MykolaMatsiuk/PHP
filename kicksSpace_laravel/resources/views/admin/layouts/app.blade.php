@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
   @include('admin.layouts.head')
+  @section ('script')
+  @show
 </head>
 <body>
   @include('admin.layouts.header')

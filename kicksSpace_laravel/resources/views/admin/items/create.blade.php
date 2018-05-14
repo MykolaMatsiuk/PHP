@@ -1,5 +1,8 @@
 @extends ('admin.layouts.app')
 
+@section ('script')
+  <script src="{{ asset('js/admin-image-preview.js') }}" defer></script>
+@endsection
 
 @section ('main')
 
@@ -25,17 +28,16 @@
                             <label for="mod">Модель</label>
                             {{ Form::text('model', null, ['class' => 'form-control', 'id' => 'mod']) }}
                         </div>
-                        <div class="form-group input-holder">
+                        <div class="form-group">
                             <label for="size">Розмір</label>
                             {{ Form::select('size', $sizes, null, ['class' => 'form-control', 'id' => 'size', 'multiple' => 'multiple', 'name' => 'size[]']) }}
+                        </div>
+                        <div class="form-group input-holder">
+                            <label>Вибрати зображення</label>
+                            {{ Form::file('image[]', array('multiple' => 'multiple', 'class' => 'inp')) }}
                             <div class="result">
                                 <ul class="img"></ul>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Вибрати зображення</label>
-                            {{ Form::file('image[]', array('multiple' => 'multiple', 'id' => 'input')) }}
-                            <div class="result"></div>
                         </div>
                         <div class="form-group">
                             <label for="body-desc">Опис товару</label>

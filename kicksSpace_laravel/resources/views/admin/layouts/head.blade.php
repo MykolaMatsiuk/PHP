@@ -7,5 +7,5 @@
 <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" />
 <!-- JavaScript     Image Preview -->
-<script src="{{ asset('js/admin-image-preview.js') }}" defer></script>
+<!-- <script src="{{ asset('js/admin-image-preview.js') }}" defer></script> -->
 

@@ -1,5 +1,8 @@
 @extends ('admin.layouts.app')
 
+@section ('script')
+  <script src="{{ asset('js/admin-image-preview.js') }}" defer></script>
+@endsection
 
 @section ('main')
 
@@ -48,12 +51,12 @@
                             @endforeach
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group input-holder">
                             <label>Додати зображення</label>
-                            <div class="img">
-                                <input type="file" id="input" name="image[]" multiple="multiple">
+                            <input type="file" class="inp" name="image[]" multiple="multiple">
+                            <div class="result">
+                                <ul class="img"></ul>
                             </div>
-                            <div class="result"></div>
                         </div>
                         <div class="form-group">
                             <label for="body-desc">Опис товару</label>
