@@ -47,7 +47,12 @@ export default class Categories extends Component {
                   (category, i) => {
                     return (
                       <li className="nav-item" key={i}>
-                        <a className="nav-link" href="#">
+                        <a
+                          className="nav-link"
+                          href={`/categories/${
+                            category.id
+                          }`}
+                        >
                           {category.name}
                         </a>
                       </li>

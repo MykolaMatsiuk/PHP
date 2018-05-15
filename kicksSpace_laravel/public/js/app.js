@@ -20645,20 +20645,47 @@ var Search = function (_Component) {
   function Search() {
     _classCallCheck(this, Search);
 
-    return _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).call(this));
+
+    _this.state = {
+      results: []
+    };
+    return _this;
   }
 
   _createClass(Search, [{
+    key: "getAutocomplete",
+    value: function getAutocomplete(e) {
+      var _this2 = this;
+
+      axios.get("/api/getautocomplete", {
+        params: { input: e.target.value }
+      }).then(function (res) {
+        return _this2.setState({ results: res.data });
+      }).catch(function (error) {
+        return console.log(error);
+      });
+      console.log(e.target.value);
+      console.log(this.state.results);
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         "form",
         { action: "/search", method: "get" },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
           type: "text",
           name: "search",
+          id: "search",
           placeholder: "\u041F\u043E\u0448\u0443\u043A",
-          className: "input"
+          className: "input",
+          autoComplete: "off",
+          onChange: function onChange(e) {
+            return _this3.getAutocomplete(e);
+          }
         }),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           "button",
@@ -20818,7 +20845,10 @@ var Categories = function (_Component) {
                   { className: "nav-item", key: i },
                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "a",
-                    { className: "nav-link", href: "#" },
+                    {
+                      className: "nav-link",
+                      href: "/categories/" + category.id
+                    },
                     category.name
                   )
                 );
@@ -20947,8 +20977,10 @@ var Comments = function (_Component) {
     var _this = _possibleConstructorReturn(this, (Comments.__proto__ || Object.getPrototypeOf(Comments)).call(this, props));
 
     _this.state = {
-      comments: "",
-      data: null
+      comments: [],
+      data: null,
+      user: null,
+      body: ""
     };
     return _this;
   }
@@ -20956,6 +20988,25 @@ var Comments = function (_Component) {
   _createClass(Comments, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      this.getComments();
+    }
+  }, {
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      this.setState({
+        user: window.user
+      });
+    }
+  }, {
+    key: "storeComments",
+    value: function storeComments(e, id) {
+      e.preventDefault();
+      __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post("/api/savecomments", {
+        id: id,
+        body: this.state.body
+      }).then().catch(function (error) {
+        console.log(error);
+      });
       this.getComments();
     }
   }, {
@@ -20999,71 +21050,124 @@ var Comments = function (_Component) {
       this.getComments();
     }
   }, {
+    key: "handleChange",
+    value: function handleChange(e) {
+      this.setState({ body: e.target.value });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this5 = this;
 
-      return this.state.comments.length ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        "ul",
-        { className: "list-group" },
-        this.state.comments.map(function (comment, i) {
-          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            "li",
-            { className: "list-group-item", key: i },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              "i",
-              null,
-              comment.created_at,
-              ": \xA0"
-            ),
-            comment.body,
-            " /",
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              "i",
-              null,
-              comment.user.email,
-              " \xA0"
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              "strong",
-              null,
-              comment.user.name
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("br", null),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              "form",
-              null,
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        "div",
+        null,
+        this.state.comments.length ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          "ul",
+          { className: "list-group" },
+          this.state.comments.map(function (comment, i) {
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              "li",
+              { className: "list-group-item", key: i },
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                "span",
-                { className: "vote-up-count" },
-                comment.votes_up
+                "i",
+                null,
+                comment.created_at,
+                ": \xA0"
               ),
-              "\xA0",
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", {
-                className: "fas fa-thumbs-up",
-                title: _this5.state.data,
-                onClick: function onClick() {
-                  return _this5.voteUp(comment.id);
-                }
-              }),
-              "\xA0\xA0",
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", {
-                className: "fas fa-thumbs-down",
-                title: _this5.state.data,
-                onClick: function onClick() {
-                  return _this5.voteDown(comment.id);
-                }
-              }),
-              "\xA0",
+              comment.body,
+              " /",
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                "span",
-                { className: "vote-down-count" },
-                comment.votes_down
+                "i",
+                null,
+                comment.user.email,
+                " \xA0"
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "strong",
+                null,
+                comment.user.name
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("br", null),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "form",
+                null,
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  "span",
+                  { className: "vote-up-count" },
+                  comment.votes_up
+                ),
+                "\xA0",
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", {
+                  className: "fas fa-thumbs-up",
+                  title: _this5.state.data,
+                  onClick: function onClick() {
+                    return _this5.voteUp(comment.id);
+                  }
+                }),
+                "\xA0\xA0",
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", {
+                  className: "fas fa-thumbs-down",
+                  title: _this5.state.data,
+                  onClick: function onClick() {
+                    return _this5.voteDown(comment.id);
+                  }
+                }),
+                "\xA0",
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  "span",
+                  { className: "vote-down-count" },
+                  comment.votes_down
+                )
+              )
+            );
+          })
+        ) : null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          "div",
+          null,
+          this.state.user ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "div",
+            { className: "card" },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              "div",
+              { className: "card-body" },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "form",
+                null,
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  "div",
+                  { className: "form-group" },
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("textarea", {
+                    name: "body",
+                    placeholder: "\u0417\u0430\u043B\u0438\u0448 \u043A\u043E\u043C\u0435\u043D\u0442\u0430\u0440",
+                    className: "form-control",
+                    onChange: function onChange(e) {
+                      return _this5.handleChange(e);
+                    },
+                    required: true
+                  })
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  "div",
+                  { className: "form-group" },
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "button",
+                    {
+                      type: "submit",
+                      className: "btn btn-primary",
+                      onClick: function onClick(e) {
+                        return _this5.storeComments(e, item.id);
+                      }
+                    },
+                    "\u0417\u0430\u043B\u0438\u0448\u0438\u0442\u0438 \u043A\u043E\u043C\u0435\u043D\u0442\u0430\u0440"
+                  )
+                )
               )
             )
-          );
-        })
-      ) : null;
+          ) : null
+        )
+      );
     }
   }]);
 
@@ -54112,6 +54216,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 
+// import Pagination from "react-js-pagination";
 
 
 
@@ -54127,13 +54232,15 @@ var App = function (_Component) {
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
 
     _this.state = {
+      // activePage: 1,
       items: null,
       itemsInCart: [],
       cart: "Кошик порожній",
       currency: null,
       itemsCount: null,
       chooseSize: null,
-      showCart: false
+      showCart: false,
+      catName: null
     };
     return _this;
   }
@@ -54157,22 +54264,33 @@ var App = function (_Component) {
         });
       }
 
-      if (typeof searchItems != "undefined") {
+      if (typeof window.searchItems != "undefined") {
         this.setState({
           items: searchItems
         });
         return;
       }
+
+      if (typeof window.itemsCat != "undefined") {
+        this.setState({
+          items: itemsCat,
+          catName: window.name
+        });
+        return;
+      }
+
       axios.get("/api/getitems").then(function (res) {
-        var arr = res.data.sort(function (a, b) {
-          return new Date(b.created_at) - new Date(a.created_at);
-        }).slice(0, 19);
         _this2.setState({
-          items: arr
+          items: res.data
         });
       }).catch(function (error) {
         console.log(error);
       });
+    }
+  }, {
+    key: "handlePageChange",
+    value: function handlePageChange(pageNumber) {
+      this.setState({ activePage: pageNumber });
     }
   }, {
     key: "addToCart",
@@ -54277,6 +54395,11 @@ var App = function (_Component) {
           )
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Categories__["a" /* default */], null),
+        this.state.catName ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          "div",
+          { className: "container cat-title" },
+          this.state.catName
+        ) : null,
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           "div",
           { className: "container" },
@@ -54377,7 +54500,7 @@ var Item = function (_Component) {
               { href: "/items/" + this.props.obj.id },
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
                 className: "card-img-top",
-                src: this.props.obj.images[0].src,
+                src: "/" + this.props.obj.images[0].src,
                 alt: this.props.obj.name,
                 height: "200"
                 // width="200"
@@ -54862,7 +54985,7 @@ var ItemShow = function (_Component) {
 
     _this.state = {
       item: null,
-      user: null,
+      // user: null,
       chosenSize: null
     };
     return _this;
@@ -54872,8 +54995,8 @@ var ItemShow = function (_Component) {
     key: "componentWillMount",
     value: function componentWillMount() {
       this.setState({
-        item: window.item,
-        user: window.user
+        item: window.item
+        // user: window.user
       });
     }
   }, {
@@ -54972,49 +55095,7 @@ var ItemShow = function (_Component) {
             )
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("hr", null),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Comments__["a" /* default */], null),
-          this.state.user ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            "div",
-            { className: "card" },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              "div",
-              { className: "card-body" },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                "form",
-                {
-                  method: "POST",
-                  action: "/savecomments"
-                },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  "div",
-                  { className: "form-group" },
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("textarea", {
-                    name: "body",
-                    placeholder: "\u0417\u0430\u043B\u0438\u0448 \u043A\u043E\u043C\u0435\u043D\u0442\u0430\u0440",
-                    className: "form-control",
-                    required: true
-                  })
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
-                  type: "hidden",
-                  name: "item_id",
-                  value: item.id
-                }),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  "div",
-                  { className: "form-group" },
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "button",
-                    {
-                      type: "submit",
-                      className: "btn btn-primary"
-                    },
-                    "\u0417\u0430\u043B\u0438\u0448\u0438\u0442\u0438 \u043A\u043E\u043C\u0435\u043D\u0442\u0430\u0440"
-                  )
-                )
-              )
-            )
-          ) : null
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Comments__["a" /* default */], null)
         )
       );
     }
@@ -55051,7 +55132,11 @@ var Basket = function (_Component) {
     var _this = _possibleConstructorReturn(this, (Basket.__proto__ || Object.getPrototypeOf(Basket)).call(this));
 
     _this.state = {
-      itemsInCart: null
+      itemsInCart: null,
+      rerender: false,
+      cart: null,
+      currency: null,
+      itemsCount: null
     };
     return _this;
   }
@@ -55060,19 +55145,87 @@ var Basket = function (_Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       if (JSON.parse(localStorage.getItem("cart")).length) {
+        var totalPrice = JSON.parse(localStorage.getItem("cart")).map(function (item) {
+          return item.price;
+        }).reduce(function (prev, current) {
+          return prev + current;
+        });
         this.setState({
-          itemsInCart: JSON.parse(localStorage.getItem("cart"))
+          itemsInCart: JSON.parse(localStorage.getItem("cart")),
+          cart: totalPrice,
+          currency: " грн",
+          itemsCount: JSON.parse(localStorage.getItem("cart")).length
         });
       }
     }
   }, {
+    key: "removeItem",
+    value: function removeItem(id) {
+      var arr = this.state.itemsInCart;
+      var arrWhole = arr.slice();
+      var remove = arr.map(function (item) {
+        return item.id;
+      }).indexOf(id);
+      var item = arr.splice(remove, 1);
+      this.setState({
+        itemsCount: arr.length,
+        cart: arr.length ? this.state.cart - arrWhole[remove].price : "Кошик порожній",
+        currency: arr.length ? "грн" : null
+      });
+      localStorage.setItem("cart", JSON.stringify(arr));
+    }
+  }, {
+    key: "changeSize",
+    value: function changeSize(e, id, size, name) {
+      var _this2 = this;
+
+      var arr = this.state.itemsInCart;
+      this.state.itemsInCart.map(function (item) {
+        if (id === item.id && size === item.chosenSize && name === item.name) {
+          item.chosenSize = e.target.value;
+          _this2.setState({ rerender: !_this2.state.rerender });
+        }
+      });
+      localStorage.setItem("cart", JSON.stringify(arr));
+    }
+  }, {
+    key: "makeOrder",
+    value: function makeOrder() {
+      axios.post("/api/makeorder", {
+        items: JSON.stringify(this.state.itemsInCart)
+      }).then(function (res) {
+        return console.log(res.data);
+      }).catch(function (error) {
+        return console.log(error);
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       return this.state.itemsInCart && window.user ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         "div",
         { className: "container cart-content" },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          "div",
+          { className: "cart-total" },
+          this.state.itemsInCart.length ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "div",
+            { className: "cart-count" },
+            "\u041A-\u0441\u0442\u044C \u0442\u043E\u0432\u0430\u0440\u0456\u0432: ",
+            this.state.itemsCount,
+            "\u0448\u0442."
+          ) : null,
+          this.state.itemsInCart.length ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "div",
+            { className: "cart-price" },
+            "\u0417\u0430\u0433\u0430\u043B\u044C\u043D\u0430 \u0432\u0430\u0440\u0442\u0456\u0441\u0442\u044C: ",
+            this.state.cart,
+            " ",
+            this.state.currency
+          ) : null
+        ),
         this.state.itemsInCart.map(function (item, i) {
           return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             "div",
@@ -55154,7 +55307,9 @@ var Basket = function (_Component) {
                         name: "size",
                         id: "size",
                         className: "form-control",
-                        onChange: _this2.props.chooseSize
+                        onChange: function onChange(e) {
+                          return _this3.changeSize(e, item.id, item.chosenSize, item.name);
+                        }
                       },
                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         "option",
@@ -55172,6 +55327,20 @@ var Basket = function (_Component) {
                         );
                       })
                     )
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "div",
+                    { className: "delete-item" },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      "button",
+                      {
+                        className: "btn btn-danger",
+                        onClick: function onClick() {
+                          return _this3.removeItem(item.id);
+                        }
+                      },
+                      "\u0412\u0438\u0434\u0430\u043B\u0438\u0442\u0438"
+                    )
                   )
                 )
               )
@@ -55179,7 +55348,21 @@ var Basket = function (_Component) {
           )
           // <hr/>
           ;
-        })
+        }),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          "div",
+          null,
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "button",
+            {
+              onClick: function onClick() {
+                return _this3.makeOrder();
+              },
+              className: "btn btn-success"
+            },
+            "\u0417\u0440\u043E\u0431\u0438\u0442\u0438 \u0437\u0430\u043C\u043E\u0432\u043B\u0435\u043D\u043D\u044F"
+          )
+        )
       ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         "div",
         { className: "container" },

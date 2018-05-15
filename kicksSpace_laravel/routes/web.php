@@ -17,7 +17,9 @@ Route::get('/items/{item}', 'ItemsController@show');
 Route::get('/orders', 'OrdersController@index');
 Route::get('/orders/{order}', 'OrdersController@show');
 Route::get('/search', 'SearchController@search');
-Route::post('/savecomments', 'CommentsController@store');
+// Route::post('/savecomments', 'CommentsController@store');
 Route::get('/cart', 'CartController@index');
+Route::get('/categories/{category}', 'CategoryController@show');
+// Route::get('/test', 'CartController@checkout');
 
 Auth::routes();

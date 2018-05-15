@@ -25,6 +25,7 @@
     "dependencies": {
         "nib": "^1.1.2",
         "owl.carousel": "^2.3.4",
+        "react-js-pagination": "^3.0.2",
         "react-router-dom": "^4.2.2"
     }
 }

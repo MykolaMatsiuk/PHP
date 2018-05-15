@@ -23,7 +23,7 @@ class Item extends Component {
             <a href={`/items/${this.props.obj.id}`}>
               <img
                 className="card-img-top"
-                src={this.props.obj.images[0].src}
+                src={`/${this.props.obj.images[0].src}`}
                 alt={this.props.obj.name}
                 height="200"
                 // width="200"

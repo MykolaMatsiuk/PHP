@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+// import Pagination from "react-js-pagination";
 import Search from "./Search";
 import Cart from "./Cart";
 import Categories from "./Categories";
@@ -9,13 +10,15 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      // activePage: 1,
       items: null,
       itemsInCart: [],
       cart: "Кошик порожній",
       currency: null,
       itemsCount: null,
       chooseSize: null,
-      showCart: false
+      showCart: false,
+      catName: null
     };
   }
 
@@ -39,29 +42,35 @@ class App extends Component {
       });
     }
 
-    if (typeof searchItems != "undefined") {
+    if (typeof window.searchItems != "undefined") {
       this.setState({
         items: searchItems
       });
       return;
     }
+
+    if (typeof window.itemsCat != "undefined") {
+      this.setState({
+        items: itemsCat,
+        catName: window.name
+      });
+      return;
+    }
+
     axios
       .get("/api/getitems")
       .then(res => {
-        let arr = res.data
-          .sort(
-            (a, b) =>
-              new Date(b.created_at) -
-              new Date(a.created_at)
-          )
-          .slice(0, 19);
         this.setState({
-          items: arr
+          items: res.data
         });
       })
       .catch(error => {
         console.log(error);
       });
+  }
+
+  handlePageChange(pageNumber) {
+    this.setState({ activePage: pageNumber });
   }
 
   addToCart(size, item) {
@@ -157,6 +166,11 @@ class App extends Component {
           </div>
         </div>
         <Categories />
+        {this.state.catName ? (
+          <div className="container cat-title">
+            {this.state.catName}
+          </div>
+        ) : null}
         <div className="container">
           {this.state.items instanceof Array ? (
             <div className="row">
@@ -173,6 +187,13 @@ class App extends Component {
                   />
                 );
               })}
+              {/*<Pagination
+                activePage={this.state.activePage}
+                itemsCountPerPage={2}
+                totalItemsCount={this.state.items.length}
+                pageRangeDisplayed={5}
+                onChange={() => this.handlePageChange()}
+              />*/}
             </div>
           ) : null}
         </div>

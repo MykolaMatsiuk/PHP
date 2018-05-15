@@ -304,6 +304,9 @@ div.cart-kicks.clickable:hover {
   margin: 0px 0 30px;
   background-color: #f3f3f3;
 }
+.cat-title {
+  color: rgba(0,0,0,0.5);
+}
 button.navbar-toggler {
   margin-left: 10px;
 }
@@ -539,6 +542,17 @@ footer {
   padding-top: 50px;
   opacity: 0.8;
 }
+.cart-content .cart-total {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.cart-content .cart-total .cart-price {
+  margin-left: 10px;
+}
 .cart-content .cart-item {
   border-radius: 0;
 }
@@ -562,6 +576,9 @@ footer {
   margin-left: 20px;
   font-size: large;
   color: #240000;
+}
+.cart-content .cart-item .basket-item .whole-item .delete-item {
+  margin-left: 30px;
 }
 @-webkit-keyframes dash {
   to {

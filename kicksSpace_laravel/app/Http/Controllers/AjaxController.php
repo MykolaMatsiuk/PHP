@@ -9,12 +9,16 @@ use App\Comment;
 use App\Category;
 use App\User;
 use App\Vote;
+use App\Order;
 
 class AjaxController extends Controller
 {
     public function getItems()
     {
-        $items = Item::with('images', 'sizes')->get(); //limit 20 //orders 2 tables
+        $items = Item::with('images', 'sizes')
+            ->orderBy('id', 'desc')
+            ->limit(20)
+            ->get(); //limit 20 //orders 2 tables
 
         return response()->json($items);
     }
@@ -81,5 +85,52 @@ class AjaxController extends Controller
 
         $no = "";
         return response()->json($no);
+    }
+
+    public function getAutocompleteResults(Request $request)
+    {
+        $value = $request->get('input');
+
+        $results = [];
+
+        $items = Item::where('name', 'LIKE', '%' . $value . '%')
+              ->orWhere('model', 'LIKE', '%' . $value . '%')->take(10)->get();
+
+        foreach ($items as $item)
+        {
+            $results[] = [ 'id' => $item->id, 'value' => $item->name ];
+        }
+
+        return response()->json($results);
+    }
+
+    public function storeComments(Request $request)
+    {
+        $this->validate(request(), ['body' => 'required|min:3']);
+
+        Comment::create([
+            'body' => request('body'),
+            'item_id' => request('id'),
+            'user_id' => Auth::user()->id
+        ]);
+
+        return null;
+    }
+
+    public function makeOrder(Request $request)
+    {
+        $items = json_decode($request->get('items'));
+        $user = Auth::user();
+        $order = $user->orders()->create(); //insert order table data
+
+        // place order and insert data to orders_products
+        foreach ($items as $item) {               // not working: Call to a member function orders() on null 
+            $order->items()->attach($item->id, [
+                'size' => $item->chosenSize,
+                'price' => $item->price
+            ]);
+        }
+        // $order->items()->attach(1); // attaches normally
+        return response()->json($items);
     }
 }

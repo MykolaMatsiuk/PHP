@@ -6,15 +6,15 @@ class ItemShow extends Component {
     super();
     this.state = {
       item: null,
-      user: null,
+      // user: null,
       chosenSize: null
     };
   }
 
   componentWillMount() {
     this.setState({
-      item: window.item,
-      user: window.user
+      item: window.item
+      // user: window.user
     });
   }
 
@@ -75,38 +75,6 @@ class ItemShow extends Component {
           </div>
           <hr />
           <Comments />
-          {this.state.user ? (
-            <div className="card">
-              <div className="card-body">
-                <form
-                  method="POST"
-                  action={`/savecomments`}
-                >
-                  <div className="form-group">
-                    <textarea
-                      name="body"
-                      placeholder="Залиш коментар"
-                      className="form-control"
-                      required
-                    />
-                  </div>
-                  <input
-                    type="hidden"
-                    name="item_id"
-                    value={item.id}
-                  />
-                  <div className="form-group">
-                    <button
-                      type="submit"
-                      className="btn btn-primary"
-                    >
-                      Залишити коментар
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          ) : null}
         </div>
       </div>
     );
