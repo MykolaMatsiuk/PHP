@@ -6,5 +6,6 @@
         <li><a href="/admin/tags"><i class="glyphicon glyphicon-record"></i> Теги</a></li>
         <li><a href="/admin/sizes"><i class="glyphicon glyphicon-list"></i> Розміри</a></li>
         <li><a href="/admin/comments"><i class="glyphicon glyphicon-stats"></i> Коментарі</a></li>
+        <li><a href="/admin/orders"><i class="glyphicon glyphicon-record"></i> Замовлення</a></li>
     </ul>
 </div>

@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
   <div class="container">
 
-    <span class="my-4 title-main"><a href="/"><span class="main-title">KicksSpace</span></a></span>
+    <span class="title-main"><a href="/"><span class="main-title">KicksSpace</span></a></span>
 
     <div class="right-sec">
       <div class="login">
@@ -36,16 +36,16 @@
             <li>
                 <input class="btn btn-block btn-primary" type="submit" value="Увійти">
             </li>
-            <li>
+<!--             <li>
               <div class="form-group text-right">
                 <small><a href="{{ route('password.request') }}">Забули пароль?</a></small>
               </div>
-            </li>
+            </li> -->
           </form>
         </ul>
         <a class="reg" href="{{ route('register') }}">/ Реєстрація</a>
         @else
-          <a href="#" class="auth">
+          <a href="/orders" class="auth">
             {{ Auth::user()->name }}
           </a>
 

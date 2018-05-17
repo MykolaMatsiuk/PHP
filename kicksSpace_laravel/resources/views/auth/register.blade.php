@@ -44,7 +44,7 @@
                             <label for="tel" class="col-md-4 control-label">Телефон</label>
 
                             <div class="col-md-6">
-                                <input id="tel" type="tel" class="form-control" name="tel" required>
+                                <input id="tel" type="tel" class="form-control" name="tel" placeholder="3809999999" required>
                             </div>
                         </div>
 

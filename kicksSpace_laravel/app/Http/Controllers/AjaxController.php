@@ -120,17 +120,19 @@ class AjaxController extends Controller
     public function makeOrder(Request $request)
     {
         $items = json_decode($request->get('items'));
+        $total = json_decode($request->get('total'));
         $user = Auth::user();
-        $order = $user->orders()->create(); //insert order table data
+        $order = $user->orders()->create([
+            'total' => $total
+        ]); //insert order table data
 
         // place order and insert data to orders_products
-        foreach ($items as $item) {               // not working: Call to a member function orders() on null 
-            $order->items()->attach($item->id, [
-                'size' => $item->chosenSize,
-                'price' => $item->price
-            ]);
+        foreach ($items as $item) {
+            $order->items()->attach($item->id,
+                ['size' => $item->chosenSize]
+            );
         }
-        // $order->items()->attach(1); // attaches normally
-        return response()->json($items);
+
+        return view('.index');
     }
 }

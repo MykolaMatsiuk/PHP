@@ -17,9 +17,4 @@ class CartController extends Controller
 
         return view('cart.index');
     }
-
-    public function checkout()
-    {
-        return Order::createOrder();
-    }
 }

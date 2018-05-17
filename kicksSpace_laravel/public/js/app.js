@@ -20818,24 +20818,8 @@ var Categories = function (_Component) {
           "div",
           { className: "container" },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            "button",
-            {
-              className: "navbar-toggler",
-              type: "button",
-              "data-toggle": "collapse",
-              "data-target": "#navbarText",
-              "aria-controls": "navbarText",
-              "aria-expanded": "false",
-              "aria-label": "Toggle navigation"
-            },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("span", { className: "navbar-toggler-icon" })
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             "div",
-            {
-              className: "collapse navbar-collapse",
-              id: "navbarText"
-            },
+            null,
             this.state.categories.length ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               "ul",
               { className: "navbar-nav mr-auto" },
@@ -55006,96 +54990,100 @@ var ItemShow = function (_Component) {
 
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         "div",
-        { className: "prod-show" },
+        { className: "container" },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           "div",
-          { className: "col-md-6" },
+          { className: "prod-show row" },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             "div",
-            { className: "owl-carousel owl-theme" },
-            item.images.map(function (image, i) {
-              return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                "div",
-                { key: i },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
-                  src: "/../" + image.src,
-                  alt: image.name
-                })
-              );
-            })
-          )
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          "div",
-          { className: "col-md-6" },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            "div",
-            { className: "name-price" },
+            { className: "col-md-6" },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              "h2",
-              { className: "name-model" },
-              item.name,
-              " ",
-              item.model
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              "h3",
-              null,
-              item.price,
-              " \u0433\u0440\u043D"
-            )
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            "p",
-            { className: "item-desc" },
-            item.description
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("hr", null),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            "div",
-            { className: "form-group" },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              "label",
-              { htmlFor: "size", className: "choose-size" },
-              "\u0412\u0438\u0431\u0435\u0440\u0438 \u0440\u043E\u0437\u043C\u0456\u0440:",
-              " "
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              "select",
-              {
-                name: "size",
-                id: "size",
-                className: "form-control",
-                onChange: this.props.chooseSize
-              },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                "option",
-                { value: "" },
-                "\u0420\u043E\u0437\u043C\u0456\u0440 \u043D\u0435 \u0432\u0438\u0431\u0440\u0430\u043D\u043E"
-              ),
-              item.sizes.map(function (size, i) {
+              "div",
+              { className: "owl-carousel owl-theme" },
+              item.images.map(function (image, i) {
                 return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  "option",
-                  { value: size.size, key: i },
-                  size.size
+                  "div",
+                  { key: i },
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
+                    src: "/../" + image.src,
+                    alt: image.name
+                  })
                 );
               })
             )
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             "div",
-            { className: "form-group" },
+            { className: "col-md-6" },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              "button",
-              {
-                onClick: this.props.toCart,
-                className: "btn btn-primary sub"
-              },
-              "\u0414\u043E \u043A\u043E\u0448\u0438\u043A\u0443"
-            )
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("hr", null),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Comments__["a" /* default */], null)
+              "div",
+              { className: "name-price" },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "h2",
+                { className: "name-model" },
+                item.name,
+                " ",
+                item.model
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "h3",
+                null,
+                item.price,
+                " \u0433\u0440\u043D"
+              )
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              "p",
+              { className: "item-desc" },
+              item.description
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("hr", null),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              "div",
+              { className: "form-group" },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "label",
+                { htmlFor: "size", className: "choose-size" },
+                "\u0412\u0438\u0431\u0435\u0440\u0438 \u0440\u043E\u0437\u043C\u0456\u0440:",
+                " "
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "select",
+                {
+                  name: "size",
+                  id: "size",
+                  className: "form-control",
+                  onChange: this.props.chooseSize
+                },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  "option",
+                  { value: "" },
+                  "\u0420\u043E\u0437\u043C\u0456\u0440 \u043D\u0435 \u0432\u0438\u0431\u0440\u0430\u043D\u043E"
+                ),
+                item.sizes.map(function (size, i) {
+                  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "option",
+                    { value: size.size, key: i },
+                    size.size
+                  );
+                })
+              )
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              "div",
+              { className: "form-group" },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "button",
+                {
+                  onClick: this.props.toCart,
+                  className: "btn btn-primary sub"
+                },
+                "\u0414\u043E \u043A\u043E\u0448\u0438\u043A\u0443"
+              )
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("hr", null),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Comments__["a" /* default */], null)
+          )
         )
       );
     }
@@ -55136,7 +55124,8 @@ var Basket = function (_Component) {
       rerender: false,
       cart: null,
       currency: null,
-      itemsCount: null
+      itemsCount: null,
+      show: false
     };
     return _this;
   }
@@ -55168,6 +55157,7 @@ var Basket = function (_Component) {
       }).indexOf(id);
       var item = arr.splice(remove, 1);
       this.setState({
+        itemsInCart: arr,
         itemsCount: arr.length,
         cart: arr.length ? this.state.cart - arrWhole[remove].price : "Кошик порожній",
         currency: arr.length ? "грн" : null
@@ -55192,12 +55182,18 @@ var Basket = function (_Component) {
     key: "makeOrder",
     value: function makeOrder() {
       axios.post("/api/makeorder", {
-        items: JSON.stringify(this.state.itemsInCart)
+        items: JSON.stringify(this.state.itemsInCart),
+        total: JSON.stringify(this.state.cart)
       }).then(function (res) {
         return console.log(res.data);
       }).catch(function (error) {
         return console.log(error);
       });
+      this.setState({
+        show: !this.state.show,
+        itemsInCart: []
+      });
+      localStorage.setItem("cart", JSON.stringify([]));
     }
   }, {
     key: "render",
@@ -55300,7 +55296,7 @@ var Basket = function (_Component) {
                   ),
                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "div",
-                    null,
+                    { className: "select-size" },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                       "select",
                       {
@@ -55349,18 +55345,57 @@ var Basket = function (_Component) {
           // <hr/>
           ;
         }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        this.state.itemsInCart.length ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           "div",
-          null,
+          { className: "make-order" },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             "button",
             {
               onClick: function onClick() {
                 return _this3.makeOrder();
               },
-              className: "btn btn-success"
+              className: "btn btn-success sub"
             },
             "\u0417\u0440\u043E\u0431\u0438\u0442\u0438 \u0437\u0430\u043C\u043E\u0432\u043B\u0435\u043D\u043D\u044F"
+          )
+        ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          "div",
+          { className: "container" },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "div",
+            { className: "card cart-register" },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              "div",
+              { className: "card-body" },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "div",
+                { className: "form-group" },
+                this.state.show ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  "p",
+                  null,
+                  "\u0414\u044F\u043A\u0443\u0454\u043C \u0437\u0430 \u0437\u0430\u043C\u043E\u0432\u043B\u0435\u043D\u043D\u044F, \u043D\u0430\u0439\u0431\u043B\u0438\u0436\u0447\u0438\u043C \u0447\u0430\u0441\u043E\u043C \u043D\u0430\u0448 \u043C\u0435\u043D\u0435\u0434\u0436\u0435\u0440 \u0437\u0432'\u044F\u0436\u0438\u0442\u044C\u0441\u044F \u0437 \u0412\u0430\u043C\u0438. \u0414\u0435\u0442\u0430\u043B\u0456 \u0437\u0430\u043C\u043E\u0432\u043B\u0435\u043D\u043D\u044F \u0412\u0438 \u043C\u043E\u0436\u0435\u0442\u0435 \u043F\u0435\u0440\u0435\u0433\u043B\u044F\u043D\u0443\u0442\u0438 \u0432 \u043E\u0441\u043E\u0431\u0438\u0441\u0442\u043E\u043C\u0443",
+                  " ",
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "a",
+                    { href: "/orders" },
+                    "\u043A\u0430\u0431\u0456\u043D\u0435\u0442\u0456"
+                  ),
+                  "."
+                ) : null,
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  "p",
+                  null,
+                  "\u041A\u043E\u0448\u0438\u043A \u043F\u043E\u0440\u043E\u0436\u043D\u0456\u0439, \u043F\u0435\u0440\u0435\u0439\u0442\u0438 \u043D\u0430",
+                  " ",
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "a",
+                    { href: "/" },
+                    "\u0433\u043E\u043B\u043E\u0432\u043D\u0443"
+                  ),
+                  " \u0441\u0442\u043E\u0440\u0456\u043D\u043A\u0443."
+                )
+              )
+            )
           )
         )
       ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -55375,7 +55410,18 @@ var Basket = function (_Component) {
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               "div",
               { className: "form-group" },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              window.user ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "p",
+                null,
+                "\u041A\u043E\u0448\u0438\u043A \u043F\u043E\u0440\u043E\u0436\u043D\u0456\u0439, \u043F\u0435\u0440\u0435\u0439\u0442\u0438 \u043D\u0430",
+                " ",
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  "a",
+                  { href: "/" },
+                  "\u0433\u043E\u043B\u043E\u0432\u043D\u0443"
+                ),
+                " \u0441\u0442\u043E\u0440\u0456\u043D\u043A\u0443."
+              ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 "p",
                 null,
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(

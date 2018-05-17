@@ -4,15 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Tag;
+use Illuminate\Support\Facades\DB;
+use App\Order;
 
-class TagController extends Controller
+class OrderController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth:admin');
     }
-    
+
+
     /**
      * Display a listing of the resource.
      *
@@ -20,9 +22,23 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = Tag::paginate(5);
+        $orders = Order::with('items')
+            ->leftJoin('users', 'orders.user_id', '=', 'users.id')
+            ->select('orders.*', 'users.name', 'users.email', 'users.tel')
+            ->paginate(5);
+        $chosenItems = DB::table('item_order')->get();
 
-        return view('admin.tags.index', compact('tags'));
+        foreach ($orders as $order) {
+            foreach ($order->items as $item) {
+                foreach ($chosenItems as $chItem) {
+                    if ($order->id === $chItem->order_id && $item->id === $chItem->item_id) {
+                        $item->chosenSize = $chItem->size;
+                    }
+                }
+            }
+        }
+
+        return view('admin.orders.index', compact('orders'));
     }
 
     /**
@@ -32,7 +48,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('admin.tags.create');
+        //
     }
 
     /**
@@ -43,15 +59,7 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'tag' => 'required'
-        ]);
-
-        $tag = new Tag;
-        $tag->name = $request->tag;
-        $tag->save();
-
-        return redirect('admin/tags')->with('status', 'Тег створено!');
+        //
     }
 
     /**
@@ -73,9 +81,9 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        $tag = Tag::where('id', $id)->first();
+        $order = Order::where('id', $id)->with('items')->first();
 
-        return view('admin.tags.edit', compact('tag'));
+        return view('admin.orders.edit', compact('order'));
     }
 
     /**
@@ -88,14 +96,14 @@ class TagController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'title' => 'required',
+            'status' => 'required',
         ]);
 
-        $tag = Tag::find($id);
-        $tag->name = $request->title;
-        $tag->save();
+        $order = Order::findOrFail($id);
+        $order->status = $request->status;
+        $order->save();
 
-        return redirect('/admin/tags')->with('status', 'Тег оновлено!');
+        return redirect('/admin/orders')->with('status', 'Статус замовлення оновлено!');
     }
 
     /**
@@ -106,8 +114,8 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        Tag::where('id', $id)->delete();
+        Order::where('id', $id)->delete();
 
-        return redirect()->back()->with('status', 'Тег видалено!');
+        return redirect()->back()->with('status', 'Замовлення видалено!');
     }
 }

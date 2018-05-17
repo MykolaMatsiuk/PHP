@@ -8,7 +8,8 @@ class Basket extends Component {
       rerender: false,
       cart: null,
       currency: null,
-      itemsCount: null
+      itemsCount: null,
+      show: false
     };
   }
 
@@ -39,6 +40,7 @@ class Basket extends Component {
     let remove = arr.map(item => item.id).indexOf(id);
     let item = arr.splice(remove, 1);
     this.setState({
+      itemsInCart: arr,
       itemsCount: arr.length,
       cart: arr.length
         ? this.state.cart - arrWhole[remove].price
@@ -66,10 +68,16 @@ class Basket extends Component {
   makeOrder() {
     axios
       .post("/api/makeorder", {
-        items: JSON.stringify(this.state.itemsInCart)
+        items: JSON.stringify(this.state.itemsInCart),
+        total: JSON.stringify(this.state.cart)
       })
       .then(res => console.log(res.data))
       .catch(error => console.log(error));
+    this.setState({
+      show: !this.state.show,
+      itemsInCart: []
+    });
+    localStorage.setItem("cart", JSON.stringify([]));
   }
 
   render() {
@@ -123,7 +131,7 @@ class Basket extends Component {
                       </span>
                       {item.price} грн
                     </div>
-                    <div>
+                    <div className="select-size">
                       <select
                         name="size"
                         id="size"
@@ -152,6 +160,7 @@ class Basket extends Component {
                         })}
                       </select>
                     </div>
+
                     <div className="delete-item">
                       <button
                         className="btn btn-danger"
@@ -169,25 +178,56 @@ class Basket extends Component {
             // <hr/>
           );
         })}
-        <div>
-          <button
-            onClick={() => this.makeOrder()}
-            className="btn btn-success"
-          >
-            Зробити замовлення
-          </button>
-        </div>
+        {this.state.itemsInCart.length ? (
+          <div className="make-order">
+            <button
+              onClick={() => this.makeOrder()}
+              className="btn btn-success sub"
+            >
+              Зробити замовлення
+            </button>
+          </div>
+        ) : (
+          <div className="container">
+            <div className="card cart-register">
+              <div className="card-body">
+                <div className="form-group">
+                  {this.state.show ? (
+                    <p>
+                      Дякуєм за замовлення, найближчим часом
+                      наш менеджер зв'яжиться з Вами. Деталі
+                      замовлення Ви можете переглянути в
+                      особистому{" "}
+                      <a href="/orders">кабінеті</a>.
+                    </p>
+                  ) : null}
+                  <p>
+                    Кошик порожній, перейти на{" "}
+                    <a href="/">головну</a> сторінку.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     ) : (
       <div className="container">
         <div className="card cart-register">
           <div className="card-body">
             <div className="form-group">
-              <p>
-                <a href="/register">Зареєструйся</a>, щоб
-                зробити замовлення або зайди в свій{" "}
-                <a href="/login">аккаунт</a>.
-              </p>
+              {window.user ? (
+                <p>
+                  Кошик порожній, перейти на{" "}
+                  <a href="/">головну</a> сторінку.
+                </p>
+              ) : (
+                <p>
+                  <a href="/register">Зареєструйся</a>, щоб
+                  зробити замовлення або зайди в свій{" "}
+                  <a href="/login">аккаунт</a>.
+                </p>
+              )}
             </div>
           </div>
         </div>

@@ -60,7 +60,7 @@ a.dropdown-item:hover {
 @media (max-width: 992px) {
   .right-sec,
   .login {
-    width: 65%;
+    width: 50%;
   }
   .right-sec .cart-img,
   .login .cart-img {
@@ -73,23 +73,17 @@ a.dropdown-item:hover {
   }
   .right-sec,
   .login {
-    width: 75%;
+    width: 50%;
   }
   .right-sec .cart-img,
   .login .cart-img {
     margin-left: 5rem;
   }
-  .right-sec .cart-msg,
-  .login .cart-msg {
+  .cart-msg {
     display: none;
   }
 }
 @media (max-width: 520px) {
-  .right-sec .login,
-  .login .login {
-    width: auto;
-    background-color: #4ee1fc;
-  }
   .right-sec .cart,
   .login .cart {
     width: 25%;
@@ -103,10 +97,6 @@ a.dropdown-item:hover {
   .right-sec .cart-msg,
   .login .cart-msg {
     display: none;
-  }
-  .right-sec .dropdown-menu,
-  .login .dropdown-menu {
-    background-color: #343a40;
   }
 }
 .drop-log {
@@ -274,6 +264,11 @@ div.cart-kicks.clickable:hover {
 .cart-drop.show {
   display: block;
 }
+@media (max-width: 768px) {
+  .cart-drop {
+    width: 200%;
+  }
+}
 .input {
   width: 90%;
   border: none;
@@ -288,6 +283,7 @@ div.cart-kicks.clickable:hover {
   outline: none;
 }
 .btn-search {
+  min-width: 50px;
   position: absolute;
   right: 0;
   top: 2px;
@@ -315,6 +311,9 @@ li.nav-item {
 }
 li.nav-item:hover {
   background: #fff;
+}
+.navbar-nav {
+  display: -webkit-inline-box;
 }
 ul.navbar-nav li.nav-item a.nav-link:hover {
   color: #4ee1fc;
@@ -524,7 +523,6 @@ p {
 }
 footer {
   width: 100%;
-  height: 60px;
   line-height: 60px;
   margin-top: 20px;
   background-color: #343a40;
@@ -541,6 +539,9 @@ footer {
   margin: 0 auto;
   padding-top: 50px;
   opacity: 0.8;
+}
+.cart-content .make-order {
+  margin-top: 10px;
 }
 .cart-content .cart-total {
   display: -webkit-box;
@@ -579,6 +580,35 @@ footer {
 }
 .cart-content .cart-item .basket-item .whole-item .delete-item {
   margin-left: 30px;
+}
+.cart-content .cart-item .basket-item .whole-item .delete-item .btn {
+  border-radius: 0;
+}
+@media (max-width: 768px) {
+  .cart-content .cart-total {
+    font-size: 0.9rem;
+  }
+  .cart-content .cart-item .card-body .basket-item .whole-item {
+    display: block;
+  }
+  .cart-content .cart-item .card-body .basket-item .whole-item .delete-item {
+    margin-left: 20px;
+    margin-top: 5px;
+  }
+  .cart-content .cart-item .card-body .basket-item .whole-item .select-size {
+    margin-right: 10px;
+  }
+  .table th,
+  .table td {
+    padding: 0;
+  }
+}
+.orders-view {
+  min-height: 600px;
+  margin-top: 15px;
+  color: #fff;
+  background-color: #000;
+  opacity: 0.7;
 }
 @-webkit-keyframes dash {
   to {
