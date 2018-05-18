@@ -23,9 +23,11 @@
         "stylus-loader": "^3.0.2"
     },
     "dependencies": {
+        "bootstrap": "^4.1.1",
         "nib": "^1.1.2",
         "owl.carousel": "^2.3.4",
         "react-js-pagination": "^3.0.2",
-        "react-router-dom": "^4.2.2"
+        "react-router-dom": "^4.2.2",
+        "save": "^2.3.2"
     }
 }

@@ -54234,7 +54234,7 @@ var App = function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      if (JSON.parse(localStorage.getItem("cart")).length) {
+      if (JSON.parse(localStorage.getItem("cart"))) {
         var totalPrice = JSON.parse(localStorage.getItem("cart")).map(function (item) {
           return item.price;
         }).reduce(function (prev, current) {
@@ -54801,7 +54801,7 @@ var AppTwo = function (_Component) {
   _createClass(AppTwo, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      if (JSON.parse(localStorage.getItem("cart")).length) {
+      if (JSON.parse(localStorage.getItem("cart"))) {
         var totalPrice = JSON.parse(localStorage.getItem("cart")).map(function (item) {
           return item.price;
         }).reduce(function (prev, current) {

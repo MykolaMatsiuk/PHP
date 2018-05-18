@@ -23,7 +23,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    if (JSON.parse(localStorage.getItem("cart")).length) {
+    if (JSON.parse(localStorage.getItem("cart"))) {
       let totalPrice = JSON.parse(
         localStorage.getItem("cart")
       )
