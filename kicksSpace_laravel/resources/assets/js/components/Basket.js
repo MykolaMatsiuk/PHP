@@ -57,13 +57,14 @@ class Basket extends Component {
     localStorage.setItem("cart", JSON.stringify(arr));
   }
 
-  changeSize(e, id, size, name) {
+  changeSize(e, id, size, name, n) {
     let arr = this.state.itemsInCart;
-    this.state.itemsInCart.map(item => {
+    this.state.itemsInCart.map((item, i) => {
       if (
         id === item.id &&
         size === item.chosenSize &&
-        name === item.name
+        name === item.name &&
+        i == n
       ) {
         item.chosenSize = e.target.value;
         this.setState({ rerender: !this.state.rerender });
@@ -141,14 +142,15 @@ class Basket extends Component {
                     <div className="select-size">
                       <select
                         name="size"
-                        id="size"
+                        id={`size${i}`}
                         className="form-control"
                         onChange={e =>
                           this.changeSize(
                             e,
                             item.id,
                             item.chosenSize,
-                            item.name
+                            item.name,
+                            i
                           )
                         }
                       >

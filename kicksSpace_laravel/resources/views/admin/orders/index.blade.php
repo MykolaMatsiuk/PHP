@@ -14,6 +14,7 @@
       <thead>
         <tr>
           <th>Дата створення</th>
+          <th>Номер замовлення</th>
           <th>Замовник</th>
           <th>Товар</th>
           <th>Загальна вартість</th>
@@ -29,13 +30,14 @@
                 {{ $order->created_at }}
               </td>
               <td>
+                {{ $order->id }}
+              </td>
+              <td>
                 {{ $order->name }} {{ $order->email }} {{ $order->tel }}
               </td>
               <td>
-                @foreach ($order->items as $item)
-                  {{ $item->name }} {{ $item->model }} розмір: {{ $item->chosenSize }}
-                  ціна: {{ $item->price }}<br />
-                @endforeach
+                  {{ $order->title }} {{ $order->model }} розмір: {{ $order->size }}
+                  ціна: {{ $order->price }}<br />
               </td>
               <td>
                 {{ $order->total }}

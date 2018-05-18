@@ -24,19 +24,21 @@ class OrderController extends Controller
     {
         $orders = Order::with('items')
             ->leftJoin('users', 'orders.user_id', '=', 'users.id')
-            ->select('orders.*', 'users.name', 'users.email', 'users.tel')
+            ->leftJoin('item_order', 'orders.id', '=', 'item_order.order_id')
+            ->leftJoin('items', 'items.id', '=', 'item_order.item_id')
+            ->select('orders.*', 'users.name', 'users.email', 'users.tel', 'items.name as title', 'items.model', 'item_order.size', 'items.price')
             ->paginate(5);
-        $chosenItems = DB::table('item_order')->get();
+        // $chosenItems = DB::table('item_order')->get();
 
-        foreach ($orders as $order) {
-            foreach ($order->items as $item) {
-                foreach ($chosenItems as $chItem) {
-                    if ($order->id === $chItem->order_id && $item->id === $chItem->item_id) {
-                        $item->chosenSize = $chItem->size;
-                    }
-                }
-            }
-        }
+        // foreach ($orders as $order) {
+        //     foreach ($order->items as $item) {
+        //         foreach ($chosenItems as $chItem) {
+        //             if ($order->id === $chItem->order_id && $item->id === $chItem->item_id) {
+        //                 $item->chosenSize = $chItem->size;
+        //             }
+        //         }
+        //     }
+        // }
 
         return view('admin.orders.index', compact('orders'));
     }

@@ -55172,12 +55172,12 @@ var Basket = function (_Component) {
     }
   }, {
     key: "changeSize",
-    value: function changeSize(e, id, size, name) {
+    value: function changeSize(e, id, size, name, n) {
       var _this2 = this;
 
       var arr = this.state.itemsInCart;
-      this.state.itemsInCart.map(function (item) {
-        if (id === item.id && size === item.chosenSize && name === item.name) {
+      this.state.itemsInCart.map(function (item, i) {
+        if (id === item.id && size === item.chosenSize && name === item.name && i == n) {
           item.chosenSize = e.target.value;
           _this2.setState({ rerender: !_this2.state.rerender });
         }
@@ -55307,10 +55307,10 @@ var Basket = function (_Component) {
                       "select",
                       {
                         name: "size",
-                        id: "size",
+                        id: "size" + i,
                         className: "form-control",
                         onChange: function onChange(e) {
-                          return _this3.changeSize(e, item.id, item.chosenSize, item.name);
+                          return _this3.changeSize(e, item.id, item.chosenSize, item.name, i);
                         }
                       },
                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
