@@ -610,6 +610,9 @@ footer {
   background-color: #000;
   opacity: 0.7;
 }
+#root {
+  min-height: 600px;
+}
 @-webkit-keyframes dash {
   to {
     stroke-dashoffset: 0;

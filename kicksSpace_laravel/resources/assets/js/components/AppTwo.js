@@ -22,23 +22,30 @@ class AppTwo extends Component {
   }
 
   componentDidMount() {
-    if (JSON.parse(localStorage.getItem("cart"))) {
-      let totalPrice = JSON.parse(
-        localStorage.getItem("cart")
-      )
-        .map(item => item.price)
-        .reduce((prev, current) => {
-          return prev + current;
-        });
-      this.setState({
-        itemsInCart: JSON.parse(
+    if (
+      JSON.parse(localStorage.getItem("cart")) &&
+      JSON.parse(localStorage.getItem("cart")) instanceof
+        Array
+    ) {
+      if (JSON.parse(localStorage.getItem("cart")).length) {
+        let totalPrice = JSON.parse(
           localStorage.getItem("cart")
-        ),
-        cart: totalPrice,
-        currency: " грн",
-        itemsCount: JSON.parse(localStorage.getItem("cart"))
-          .length
-      });
+        )
+          .map(item => item.price)
+          .reduce((prev, current) => {
+            return prev + current;
+          }, 0);
+        this.setState({
+          itemsInCart: JSON.parse(
+            localStorage.getItem("cart")
+          ),
+          cart: totalPrice,
+          currency: " грн",
+          itemsCount: JSON.parse(
+            localStorage.getItem("cart")
+          ).length
+        });
+      }
     }
     this.setState({
       item: window.item

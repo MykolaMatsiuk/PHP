@@ -54234,18 +54234,20 @@ var App = function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      if (JSON.parse(localStorage.getItem("cart"))) {
-        var totalPrice = JSON.parse(localStorage.getItem("cart")).map(function (item) {
-          return item.price;
-        }).reduce(function (prev, current) {
-          return prev + current;
-        });
-        this.setState({
-          itemsInCart: JSON.parse(localStorage.getItem("cart")),
-          cart: totalPrice,
-          currency: " грн",
-          itemsCount: JSON.parse(localStorage.getItem("cart")).length
-        });
+      if (JSON.parse(localStorage.getItem("cart")) && JSON.parse(localStorage.getItem("cart")) instanceof Array) {
+        if (JSON.parse(localStorage.getItem("cart")).length) {
+          var totalPrice = JSON.parse(localStorage.getItem("cart")).map(function (item) {
+            return item.price;
+          }).reduce(function (prev, current) {
+            return prev + current;
+          }, 0);
+          this.setState({
+            itemsInCart: JSON.parse(localStorage.getItem("cart")),
+            cart: totalPrice,
+            currency: " грн",
+            itemsCount: JSON.parse(localStorage.getItem("cart")).length
+          });
+        }
       }
 
       if (typeof window.searchItems != "undefined") {
@@ -54801,18 +54803,20 @@ var AppTwo = function (_Component) {
   _createClass(AppTwo, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      if (JSON.parse(localStorage.getItem("cart"))) {
-        var totalPrice = JSON.parse(localStorage.getItem("cart")).map(function (item) {
-          return item.price;
-        }).reduce(function (prev, current) {
-          return prev + current;
-        });
-        this.setState({
-          itemsInCart: JSON.parse(localStorage.getItem("cart")),
-          cart: totalPrice,
-          currency: " грн",
-          itemsCount: JSON.parse(localStorage.getItem("cart")).length
-        });
+      if (JSON.parse(localStorage.getItem("cart")) && JSON.parse(localStorage.getItem("cart")) instanceof Array) {
+        if (JSON.parse(localStorage.getItem("cart")).length) {
+          var totalPrice = JSON.parse(localStorage.getItem("cart")).map(function (item) {
+            return item.price;
+          }).reduce(function (prev, current) {
+            return prev + current;
+          }, 0);
+          this.setState({
+            itemsInCart: JSON.parse(localStorage.getItem("cart")),
+            cart: totalPrice,
+            currency: " грн",
+            itemsCount: JSON.parse(localStorage.getItem("cart")).length
+          });
+        }
       }
       this.setState({
         item: window.item
@@ -55133,18 +55137,20 @@ var Basket = function (_Component) {
   _createClass(Basket, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      if (JSON.parse(localStorage.getItem("cart")).length) {
-        var totalPrice = JSON.parse(localStorage.getItem("cart")).map(function (item) {
-          return item.price;
-        }).reduce(function (prev, current) {
-          return prev + current;
-        });
-        this.setState({
-          itemsInCart: JSON.parse(localStorage.getItem("cart")),
-          cart: totalPrice,
-          currency: " грн",
-          itemsCount: JSON.parse(localStorage.getItem("cart")).length
-        });
+      if (JSON.parse(localStorage.getItem("cart")) && JSON.parse(localStorage.getItem("cart")) instanceof Array) {
+        if (JSON.parse(localStorage.getItem("cart")).length) {
+          var totalPrice = JSON.parse(localStorage.getItem("cart")).map(function (item) {
+            return item.price;
+          }).reduce(function (prev, current) {
+            return prev + current;
+          }, 0);
+          this.setState({
+            itemsInCart: JSON.parse(localStorage.getItem("cart")),
+            cart: totalPrice,
+            currency: " грн",
+            itemsCount: JSON.parse(localStorage.getItem("cart")).length
+          });
+        }
       }
     }
   }, {
