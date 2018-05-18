@@ -23,7 +23,7 @@
                     {{ $order->name }} {{ $order->model }} розмір: {{ $order->size }} ціна: {{ $order->price }}грн<br /><br />
                 </td>
                 <td>{{ $order->status }}</td>
-                <td>{{ $order->price }}грн</td>
+                <td>{{ $order->total }}грн</td>
               </tr>
             </tbody>
             @endforeach
