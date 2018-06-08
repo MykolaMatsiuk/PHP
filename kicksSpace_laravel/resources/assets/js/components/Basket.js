@@ -72,7 +72,7 @@ class Basket extends Component {
     });
     localStorage.setItem("cart", JSON.stringify(arr));
   }
-
+  // index array cart, telegram api for notifications
   makeOrder() {
     axios
       .post("/api/makeorder", {

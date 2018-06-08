@@ -133,6 +133,6 @@ class AjaxController extends Controller
             );
         }
 
-        return view('.index');
+        return null;
     }
 }
