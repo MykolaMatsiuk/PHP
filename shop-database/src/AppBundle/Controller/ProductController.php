@@ -3,8 +3,10 @@
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Entity\Product;
 
 class ProductController extends Controller
 {
@@ -24,4 +26,20 @@ class ProductController extends Controller
         // $id = {id}
         return $this->render('products/show.html.twig', ['id' => $id]);
     }
+
+    /**
+     * @Route("/product-test", name="product_test")
+     * @Template()
+     */
+    public function testAction()
+    {
+        $product = new Product();
+
+        $product->setTitle('Shoe')
+                ->setDescription('shoe <b>test</b> testing')
+                ->setPrice('3200');
+
+        return ['product' => $product];
+    }
+
 }

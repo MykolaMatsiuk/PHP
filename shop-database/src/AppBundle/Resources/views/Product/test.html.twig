@@ -1,0 +1,8 @@
+{% extends '@App/layout.html.twig' %}
+
+{% block body %}
+    <h2>Wellcome to product-test</h2>
+    <h3>{{ product.title }}</h3>
+    <p>{{ product.description | raw }} - <strong>${{ product.price }}</strong></p>
+{% endblock %}
+
