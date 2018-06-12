@@ -1,7 +1,15 @@
-{% extends 'base.html.twig' %}
+{% extends '@App/layout.html.twig' %}
 
 {% block body %}
     <h2>Products List</h2>
+    <hr />
+
+    {% for product in products %}
+        <h3><a href="{{ path('product_page', {id: product.id}) }}">{{ product.title }}</a></h3>
+        <p>{{ product.description }}</p>
+        <p>price - ${{ product.price }}</p>
+    {% endfor %}
+
 {% endblock %}
 
 {% block title %}

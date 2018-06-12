@@ -12,19 +12,24 @@ class ProductController extends Controller
 {
     /**
      * @Route("/products", name="products_page")
+     * @Template()
      */
     public function indexAction()
     {
-        return $this->render('products/index.html.twig');
+        $repo = $this->get('doctrine')->getRepository('AppBundle:Product');
+        $products = $repo->findAll();
+
+        return compact('products');
     }
 
     /**
-     * @Route("/products/{id}{sl}", name="product_page", requirements={"id" : "[1-9][0-9]*", "sl" : "/?"})
+     * @Route("/products/{id}{sl}", name="product_page", defaults={"sl" : ""}, requirements={"id" : "[1-9][0-9]*", "sl" : "/?"})
+     * @Template()
      */
     public function showAction($id)
     {
         // $id = {id}
-        return $this->render('products/show.html.twig', ['id' => $id]);
+        return ['id' => $id];
     }
 
     /**
@@ -38,6 +43,10 @@ class ProductController extends Controller
         $product->setTitle('Shoe')
                 ->setDescription('shoe <b>test</b> testing')
                 ->setPrice('3200');
+
+        $em = $this->get('doctrine')->getManager();
+        $em->persist($product);
+        $em->flush();
 
         return ['product' => $product];
     }
