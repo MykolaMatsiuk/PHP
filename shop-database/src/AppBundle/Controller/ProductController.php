@@ -29,7 +29,9 @@ class ProductController extends Controller
     public function showAction($id)
     {
         // $id = {id}
-        return ['id' => $id];
+        $repo = $this->get('doctrine')->getRepository('AppBundle:Product');
+        $product = $repo->find($id);
+        return compact('product');
     }
 
     /**
