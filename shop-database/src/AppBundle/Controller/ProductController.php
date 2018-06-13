@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Product;
+use AppBundle\Form\ProductType;
 
 class ProductController extends Controller
 {
@@ -28,29 +29,46 @@ class ProductController extends Controller
      */
     public function showAction($id)
     {
-        // $id = {id}
-        $repo = $this->get('doctrine')->getRepository('AppBundle:Product');
-        $product = $repo->find($id);
+        $product = $this->get('doctrine')
+                        ->getRepository('AppBundle:Product')
+                        ->find($id);
+
+        if (!$product) {
+            throw $this->createNotFoundException('Product not found!');
+        }
+
         return compact('product');
     }
 
     /**
-     * @Route("/product-test", name="product_test")
+     * @Route("/products/edit/{id}", name="product_edit", requirements={"id" : "[1-9][0-9]*"})
      * @Template()
      */
-    public function testAction()
+    public function editAction(Request $request)
     {
-        $product = new Product();
+        $id = $request->get('id');
+        $doctrine = $this->get('doctrine');
 
-        $product->setTitle('Shoe')
-                ->setDescription('shoe <b>test</b> testing')
-                ->setPrice('3200');
+        $product = $doctrine->getRepository('AppBundle:Product')
+                            ->find($id);
 
-        $em = $this->get('doctrine')->getManager();
-        $em->persist($product);
-        $em->flush();
+        if (!$product) {
+            throw $this->createNotFoundException('Product not found!');
+        }
 
-        return ['product' => $product];
+        $form = $this->createForm(ProductType::class, $product);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $doctrine->getManager();
+            $em->persist($product);
+            $em->flush();
+
+            $this->addFlash('success', 'Product edited!');
+            return $this->redirectToRoute('product_page', ['id' => $id]);
+        }
+
+        return ['product' => $product, 'form' => $form->createView()];
     }
 
 }

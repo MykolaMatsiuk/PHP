@@ -6,7 +6,7 @@
 
     {% for product in products %}
         <h3><a href="{{ path('product_page', {id: product.id}) }}">{{ product.title }}</a></h3>
-        <p>{{ product.description }}</p>
+        <p>{{ product.description | raw }}</p>
         <p>price - ${{ product.price }}</p>
     {% endfor %}
 

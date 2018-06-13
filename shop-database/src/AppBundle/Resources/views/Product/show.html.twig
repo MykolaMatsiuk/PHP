@@ -3,7 +3,7 @@
 {% block body %}
     <h2>Product: {{ product.title }}</h2>
     <p class="small">${{ product.price }}</p>
-    <p>{{ product.description }}</p>
+    <p>{{ product.description | raw }}</p>
 {% endblock %}
 
 {% block title %}

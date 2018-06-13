@@ -1,0 +1,30 @@
+{% extends '@App/layout.html.twig' %}
+
+{% block body %}
+    <h1>Edit Product</h1>
+    {{ form_start(form) }}
+        <div class="form-group col-md-6">
+            {{ form_label(form.title) }}
+            {{ form_errors(form.title) }}
+            {{ form_widget(form.title) }}
+        </div>
+        <div class="form-group col-md-6">
+            {{ form_label(form.description) }}
+            {{ form_errors(form.description) }}
+            {{ form_widget(form.description) }}
+        </div>
+        <div class="form-group col-md-6">
+            {{ form_label(form.price) }}
+            {{ form_errors(form.price) }}
+            {{ form_widget(form.price) }}
+        </div>
+        <div class="form-group col-md-6">
+            {{ form_label(form.category) }}
+            {{ form_errors(form.category) }}
+            {{ form_widget(form.category) }}
+        </div>
+        <div class="form-group col-md-6">
+            <button class="btn btn-primary">Save</button>
+        </div>
+    {{ form_end(form) }}
+{% endblock %}

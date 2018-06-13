@@ -3,9 +3,10 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="AppBundle\Entity\ProductRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ProductRepository")
  * @ORM\Table(name="product")
  */
 class Product
@@ -19,18 +20,26 @@ class Product
 
     /**
      * @ORM\Column(type="string", length=128)
+     * @Assert\NotBlank(message="fill title field")
      */
     private $title;
 
     /**
      * @ORM\Column(type="text", length=5000)
+     * @Assert\NotBlank(message="fill description field")
      */
     private $description;
 
     /**
      * @ORM\Column(type="decimal")
+     * @Assert\NotBlank(message="fill price field")
      */
     private $price;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category")
+     */
+    private $category;
 
     /**
      * Get id
@@ -112,5 +121,29 @@ class Product
     public function getPrice()
     {
         return $this->price;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \AppBundle\Entity\Category $category
+     *
+     * @return Product
+     */
+    public function setCategory(\AppBundle\Entity\Category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \AppBundle\Entity\Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 }
