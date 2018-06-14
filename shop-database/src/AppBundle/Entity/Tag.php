@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Category
+ * Tag
  *
- * @ORM\Table(name="category")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\CategoryRepository")
+ * @ORM\Table(name="tag")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\TagRepository")
  */
-class Category
+class Tag
 {
     /**
      * @var int
@@ -24,18 +24,16 @@ class Category
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Product", mappedBy="category")
+     * @ORM\ManyToMany(targetEntity="Product", mappedBy="tags")
      */
     private $products;
-
-
 
     /**
      * Get id
@@ -52,7 +50,7 @@ class Category
      *
      * @param string $name
      *
-     * @return Category
+     * @return Tag
      */
     public function setName($name)
     {
@@ -83,7 +81,7 @@ class Category
      *
      * @param Product $product
      *
-     * @return Category
+     * @return Tag
      */
     public function addProduct(Product $product)
     {

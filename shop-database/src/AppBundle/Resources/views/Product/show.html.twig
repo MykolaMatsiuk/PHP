@@ -4,6 +4,15 @@
     <h2>Product: {{ product.title }}</h2>
     <p class="small">${{ product.price }}</p>
     <p>{{ product.description | raw }}</p>
+    {% if (product.category) %}<p>Category: {{ product.category.name }}</p>{% endif %}
+    {% if product.tags is not empty %}
+        Tags:
+        <ul>
+        {% for tag in product.tags %}
+            <li>{{ tag.name }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
 {% endblock %}
 
 {% block title %}

@@ -38,7 +38,15 @@ class ProductType extends AbstractType
             'choice_label' => 'name',
             // 'expanded' => true,
             // 'multiple' => false
-        ));
+        ))->add('tags', EntityType::class, array(
+            'attr' => [
+                'class' => 'form-control'
+            ],
+            'class' => 'AppBundle:Tag',
+            'choice_label' => 'name',
+            // 'expanded' => true,
+            'multiple' => true
+        ));;
     }/**
      * {@inheritdoc}
      */

@@ -37,9 +37,16 @@ class Product
     private $price;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category")
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")
      */
     private $category;
+
+    /**
+     * @var  ArrayCollection
+     * 
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="products")
+     */
+    private $tags;
 
     /**
      * Get id
@@ -126,11 +133,11 @@ class Product
     /**
      * Set category
      *
-     * @param \AppBundle\Entity\Category $category
+     * @param Category $category
      *
      * @return Product
      */
-    public function setCategory(\AppBundle\Entity\Category $category = null)
+    public function setCategory(Category $category = null)
     {
         $this->category = $category;
 
@@ -145,5 +152,46 @@ class Product
     public function getCategory()
     {
         return $this->category;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add tag
+     *
+     * @param Tag $tag
+     *
+     * @return Product
+     */
+    public function addTag(Tag $tag)
+    {
+        $this->tags[] = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Remove tag
+     *
+     * @param Tag $tag
+     */
+    public function removeTag(Tag $tag)
+    {
+        $this->tags->removeElement($tag);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 }

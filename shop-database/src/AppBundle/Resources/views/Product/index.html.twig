@@ -7,6 +7,15 @@
     {% for product in products %}
         <h3><a href="{{ path('product_page', {id: product.id}) }}">{{ product.title }}</a></h3>
         <p>{{ product.description | raw }}</p>
+        {% if (product.category) %}<p>Category: {{ product.category.name }}</p>{% endif %}
+        {% if product.tags is not empty %}
+            Tags:
+            <ul>
+            {% for tag in product.tags %}
+                <li>{{ tag.name }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
         <p>price - ${{ product.price }}</p>
     {% endfor %}
 
