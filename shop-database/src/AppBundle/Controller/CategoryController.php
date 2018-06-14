@@ -15,6 +15,14 @@ class CategoryController extends Controller
      */
     public function showAction($id)
     {
-        return [];
+        $category = $this->get('doctrine')
+                        ->getRepository('AppBundle:Category')
+                        ->find($id);
+
+        if (!$category) {
+            throw $this->createNotFoundException('Category not found!');
+        }
+
+        return compact('category');
     }
 }
