@@ -37,6 +37,13 @@ class User implements UserInterface
     private $password;
 
     /**
+     * @var array
+     *
+     * @ORM\Column(name="roles", type="json_array")
+     */
+    private $roles;
+
+    /**
      * Get id
      *
      * @return int
@@ -112,7 +119,7 @@ class User implements UserInterface
      */
     public function getRoles()
     {
-        return ['ROLE_ADMIN'];
+        return $this->roles;
     }
 
     /**
@@ -146,5 +153,19 @@ class User implements UserInterface
     public function eraseCredentials()
     {
 
+    }
+
+    /**
+     * Set roles
+     *
+     * @param array $roles
+     *
+     * @return User
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+
+        return $this;
     }
 }

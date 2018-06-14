@@ -19,11 +19,12 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $user = new User();
-        $plainPassword = 'admin';
+        $plainPassword = 'manager';
 
         $encoded = $this->encoder->encodePassword($user, $plainPassword);
 
-        $user->setEmail('admin@products.com');
+        $user->setEmail('manager@products.com');
+        $user->setRoles(['ROLE_SMTHNG']);
         $user->setPassword($encoded);
 
         $manager->persist($user);

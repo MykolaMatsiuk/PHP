@@ -30,7 +30,11 @@
           <li {% if  app.request.attributes.get('_route') starts with 'product' %} class="active" {% endif  %}  class="nav-item">
             <a class="nav-link" href="{{ path('products_page') }}">Products</a>
           </li>
-          
+          {% if is_granted('ROLE_ADMIN') %}
+            <li class="nav-item"><a class="nav-link" href="{{ path('security_logout') }}">Logout ({{ app.user.email }})</a></li>
+          {% else %}
+            <li class="nav-item"><a class="nav-link" href="{{ path('security_login') }}">Login</a></li>
+          {% endif %}
           {#<li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Dropdown

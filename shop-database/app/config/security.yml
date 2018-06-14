@@ -6,12 +6,17 @@ security:
     providers:
         in_memory:
             memory: ~
+        db_provider:
+            entity:
+                class: AppBundle:User
+                property: email
 
     encoders:
         AppBundle\Entity\User:
             algorithm: bcrypt
 
     access_control:
+        - { path: ^/admin/something, roles: ROLE_SMTHNG }
         - { path: ^/admin, roles: ROLE_ADMIN }
 
     firewalls:
@@ -22,10 +27,13 @@ security:
 
         main:
             anonymous: ~
+            provider: db_provider
             form_login:
                 login_path: /login
                 check_path: /login
-                
+            logout:
+                path:   /logout
+                target: /
             # activate different ways to authenticate
 
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate

@@ -39,36 +39,4 @@ class ProductController extends Controller
 
         return compact('product');
     }
-
-    /**
-     * @Route("/products/edit/{id}", name="product_edit", requirements={"id" : "[1-9][0-9]*"})
-     * @Template()
-     */
-    public function editAction(Request $request)
-    {
-        $id = $request->get('id');
-        $doctrine = $this->get('doctrine');
-
-        $product = $doctrine->getRepository('AppBundle:Product')
-                            ->find($id);
-
-        if (!$product) {
-            throw $this->createNotFoundException('Product not found!');
-        }
-
-        $form = $this->createForm(ProductType::class, $product);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $doctrine->getManager();
-            $em->persist($product);
-            $em->flush();
-
-            $this->addFlash('success', 'Product edited!');
-            return $this->redirectToRoute('product_page', ['id' => $id]);
-        }
-
-        return ['product' => $product, 'form' => $form->createView()];
-    }
-
 }
